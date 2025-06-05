@@ -1,153 +1,117 @@
-body {
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    background-color: #f0f2f5;
-    margin: 0;
+    height: 100vh;
+    background: #f0f2f5;
     font-family: Arial, sans-serif;
-    perspective: 1000px; /* For 3D flip effect */
-}
+    perspective: 1000px;
+  }
 
-.card-container {
-    width: 450px; /* Approximate width based on the image */
-    height: 280px; /* Approximate height based on the image */
+  .card-container {
+    width: 450px;
+    height: 280px;
     position: relative;
-    transition: transform 0.8s;
     transform-style: preserve-3d;
-}
+    transition: transform 0.8s;
+  }
 
-.card {
+  .card {
+    position: absolute;
     width: 100%;
     height: 100%;
-    position: absolute;
-    backface-visibility: hidden;
     border-radius: 15px;
     overflow: hidden;
+    backface-visibility: hidden;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
-}
+    justify-content: space-between;
+    background-color: #fff;
+    padding: 20px 30px;
+  }
 
-/* Front Card Styling */
-.front-card {
-    background-color: #ffffff; /* White background initially */
-    color: #333; /* Default text color for front card when white background */
-    transition: background-image 0.5s ease, background-color 0.5s ease, color 0.5s ease; /* Smooth transition for background and text color */
-}
+  .front-card {
+    z-index: 2;
+    background-color: #fff;
+    transition: background-image 0.5s ease, background-color 0.5s ease, color 0.5s ease;
+  }
 
-.front-card:hover {
+  .front-card:hover {
     background-image: url('./images/background-image.jpg');
     background-size: cover;
     background-position: center;
-    background-color: #333; /* Fallback/background for the image if it takes time to load */
-    color: white; /* Text turns white on hover */
-}
+    background-color: #333;
+    color: white;
+  }
 
+  .front-card:hover .background-overlay {
+    background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.7) 100%);
+  }
 
-.background-overlay {
+  .background-overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.0) 0%, rgba(0,0,0,0.0) 100%); /* Initially transparent */
+    background: linear-gradient(to bottom, rgba(0,0,0,0.0) 0%, rgba(0,0,0,0.0) 100%);
     z-index: 1;
-    transition: background 0.5s ease; /* Smooth transition for overlay */
-}
+    transition: background 0.3s ease;
+  }
 
-.front-card:hover .background-overlay {
-    background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.7) 100%); /* Darker gradient on hover */
-}
-
-
-.front-card .content {
+  .card .content {
     position: relative;
     z-index: 2;
-    padding: 20px 30px;
-}
+  }
 
-.top-right-icon {
+  .top-right-icon, .bottom-right-icon {
     position: absolute;
+    width: 80px;
+    height: 80px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 3;
+  }
+
+  .top-right-icon {
     top: 0;
     right: 0;
-    width: 80px; /* Adjust size as needed */
-    height: 80px; /* Adjust size as needed */
-    border-top-right-radius: 15px; /* Matches card's border-radius */
-    z-index: 3;
-    background-color: #f0f2f5; /* This will be the "white space" color */
-    padding-left: 3rem;
-    box-sizing: border-box; /* Ensures padding is included in the width/height */
-    background-image: url('./images/Top-right-image.jpg'); /* Your actual icon image */
-    background-size: contain; /* Ensures the icon fits within the padded area */
-    background-repeat: no-repeat; /* Prevents the icon from repeating */
-    background-position: center; /* Centers the icon within its container */
-}
+    border-top-right-radius: 15px;
+    background-color: #f0f2f5;
+    background-image: url('./images/Top-right-image.jpg');
+  }
 
-.front-card h1 {
-    font-size: 2.2em;
-    margin-bottom: 10px;
-    line-height: 1.2;
-}
-
-.front-card p {
-    font-size: 1em;
-    line-height: 1.5;
-    margin-bottom: 20px;
-    max-width: 80%; /* To prevent text from going too wide */
-}
-
-/* Back Card Styling */
-.back-card {
-    background-color: #ffffff;
-    color: #333;
-    transform: rotateY(180deg);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between; /* To push content and logo apart */
-    padding: 20px 30px;
-}
-
-.back-card .content {
-    flex-grow: 1; /* Allows content to take available space */
-}
-
-.back-card h1 {
-    font-size: 2em;
-    margin-bottom: 10px;
-    color: #333;
-}
-
-.back-card p {
-    font-size: 1em;
-    line-height: 1.5;
-    color: #555;
-    margin-bottom: 20px;
-}
-
-.bottom-right-icon {
-    position: absolute;
+  .bottom-right-icon {
     bottom: 0;
     right: 0;
-    width: 80px; /* Adjust size as needed */
-    height: 80px; /* Adjust size as needed */
-    border-bottom-right-radius: 15px; /* Matches card's border-radius */
-    z-index: 3;
-    background-color: #f0f2f5; /* This will be the "white space" color */
-    padding-right: 3rem;
-    box-sizing: border-box; /* Ensures padding is included in the width/height */
-    background-image: url('./images/Top-right-image.jpg'); /* Your actual icon image */
-    background-size: contain; /* Ensures the icon fits within the padded area */
-    background-repeat: no-repeat; /* Prevents the icon from repeating */
-    background-position: center; /* Centers the icon within its container */
-}
+    border-bottom-right-radius: 15px;
+    background-color: #f0f2f5;
+    background-image: url('./images/Top-right-image.jpg');
+  }
 
-/* Read More Button */
-.read-more-button {
+  h1 {
+    font-size: 2em;
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-size: 1em;
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+
+  .read-more-button {
     display: inline-flex;
     align-items: center;
-    background-color: #ff8c00; /* Orange color from the front card */
+    background-color: #ff8c00;
     color: white;
     padding: 10px 20px;
     border-radius: 5px;
@@ -155,24 +119,21 @@ body {
     font-weight: bold;
     transition: background-color 0.3s ease;
     font-size: 0.9em;
-}
+  }
 
-.read-more-button:hover {
+  .read-more-button:hover {
     background-color: #e67e00;
-}
+  }
 
-.read-more-button .arrow {
+  .read-more-button .arrow {
     margin-left: 8px;
     font-size: 1.2em;
-    line-height: 1;
-}
+  }
 
-/* Flip Effect */
-.card-container.flipped {
+  .back-card {
     transform: rotateY(180deg);
-}
+  }
 
-/* Optional: Add a smooth transition for the overlay */
-.background-overlay {
-    transition: background 0.3s ease;
-}
+  .card-container.flipped {
+    transform: rotateY(180deg);
+  }
