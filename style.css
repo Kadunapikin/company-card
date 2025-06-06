@@ -32,7 +32,7 @@ body {
     border-top-right-radius: 0;
     overflow: hidden;
     backface-visibility: hidden;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    /* box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -145,7 +145,7 @@ body {
     right: 0;
     background-color: #f5f5f5; /* Match body background */
     padding: 0 0 5px 5px; /* Adjust padding for visual alignment */
-    box-sizing: border-box;
+    /* box-sizing: border-box; */
     border-bottom-left-radius: 24px; /* Rounded corner for the image background */
     opacity: 1; /* Initially visible */
     transition: opacity 0.3s ease; /* For hover effect */
@@ -204,7 +204,6 @@ p {
         padding: 20px 25px; /* Adjust padding for smaller screens */
         border-radius: 18px; /* Slightly smaller border-radius for mobile */
         border-top-right-radius: 0; /* Keep sharp for cutout */
-        border: 4px solid #f5f5f5; /* Adjust outer border thickness */
     }
 
     .card::before,
@@ -212,10 +211,10 @@ p {
         width: 18px; /* Adjust corner cutout size */
         height: 18px; /* Adjust corner cutout size */
         border-radius: 18px; /* Match new card radius */
-        box-shadow: -9px -9px 0 9px white; /* Adjust shadow for mobile */
+        /* box-shadow: -9px -9px 0 9px white;  */
     }
     .card::after {
-        box-shadow: 9px 9px 0 9px white;
+        /* box-shadow: 9px 9px 0 9px white; */
     }
 
 
@@ -224,9 +223,18 @@ p {
         margin-bottom: 15px;
     }
 
+    .back-h1 {
+        font-size: 1.2em; /* Adjust back heading size */
+        margin-bottom: 25px; /* Adjust margin for back heading */
+    }
+
     p {
         font-size: 0.9em; /* Adjust paragraph size */
-        margin-bottom: 20px;
+        margin-bottom: 15px;
+    }
+
+    .back-p {
+        font-size: 0.8em; /* Adjust paragraph size */
     }
 
     .read-more-button {
